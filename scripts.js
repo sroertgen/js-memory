@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const whichDeck = document.createElement("h3");
     whichDeck.classList.add("which-deck");
     whichDeck.textContent = "Welches Deck möchtest du spielen?";
-    chooseGrid.appendChild(whichDeck);
+    choose.insertBefore(whichDeck, choose.firstChild);
 
     Object.keys(decks).forEach(key => {
       // check if the key is present in cardDeck
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardsChosen.push(cardId);
     if (cardsChosen.length === 2) {
       // check if they are matches
-      setTimeout(checkForMatch, 400);
+      setTimeout(checkForMatch, 500);
     }
   }
 

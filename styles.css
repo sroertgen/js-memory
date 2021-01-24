@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   display: flex;
-  background: linear-gradient(45deg, lightgreen, orange);
+  background: lightgreen;
 }
 
 .choose-grid {
@@ -19,24 +19,23 @@ body {
 
 .deck-button {
   margin: 10px;
-  height: 150px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 5rem;
+  font-size: 3rem;
   border-radius: 8px;
   transform: scale(1);
   transition: transform 0.5s;
 }
 
 .deck-button:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .level-button {
   margin: 10px;
-  width: 150px;
-  height: 150px;
+  width: 8rem;
+  height: 8rem;
   font-family: fantasy;
-  font-size: 7rem;
+  font-size: 5rem;
   border-radius: 8px;
   transform: scale(1);
   transition: transform 0.5s;
@@ -70,7 +69,7 @@ body {
 .info-box h3 {
   display: inline;
   margin: 0 2rem 0 0;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .memory-game {
@@ -83,8 +82,8 @@ body {
 
 .card {
   margin: 10px 10px 10px 10px;
-  width: 150px;
-  height: 150px;
+  width: 8rem;
+  height: 8rem;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   transform: scale(1);
@@ -117,6 +116,7 @@ button#reset:hover {
 
 /* img that starts left */
 .won-img-left {
+  position: absolute;
   width: 150px;
   height: 150px;
   display: inline;
@@ -125,7 +125,7 @@ button#reset:hover {
   animation-duration: 5s;
   animation-fill-mode: forwards;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
 }
 
@@ -139,19 +139,18 @@ button#reset:hover {
   animation-duration: 4s;
   animation-fill-mode: forwards;
   position: fixed;
-  bottom: 0;
+  top: 0;
   right: 0;
 }
 
-
 @keyframes left-to-right {
   100% {
-    transform: translate(100vh, -80vh) rotate(720deg);
+    transform: rotate(720deg);
   }
 }
 
 @keyframes right-to-left {
   100% {
-    transform: translate(-100vh, -80vh) rotate(720deg) scaleX(-1);
+    transform: rotate(720deg) scaleX(-1);
   }
 }
