@@ -1,0 +1,157 @@
+body {
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(45deg, lightgreen, orange);
+}
+
+.choose-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.choose h3 {
+  display: block;
+  font-size: 3rem;
+}
+
+.deck-button {
+  margin: 10px;
+  height: 150px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 5rem;
+  border-radius: 8px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.deck-button:hover {
+  transform: scale(1.2);
+}
+
+.level-button {
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+  font-family: fantasy;
+  font-size: 7rem;
+  border-radius: 8px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.level-button:hover {
+  transform: scale(1.2);
+}
+
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.game {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: start;
+  width: 80%;
+}
+
+.info-box {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.info-box h3 {
+  display: inline;
+  margin: 0 2rem 0 0;
+  font-size: 3rem;
+}
+
+.memory-game {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.card {
+  margin: 10px 10px 10px 10px;
+  width: 150px;
+  height: 150px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.card:hover {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+button#reset {
+  font-size: 2.5rem;
+  height: 4rem;
+  /* width: 40%; */
+  display: inline;
+  margin: 30px auto;
+  border-radius: 10px;
+  transform: scale(1);
+  transition: 0.5s;
+}
+
+button#reset:hover {
+  transform: scale(1.2);
+}
+
+/* img that starts left */
+.won-img-left {
+  width: 150px;
+  height: 150px;
+  display: inline;
+  z-index: 1;
+  animation-name: left-to-right;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/* img that starts right */
+.won-img-right {
+  width: 150px;
+  height: 150px;
+  display: inline;
+  z-index: 1;
+  animation-name: right-to-left;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+
+@keyframes left-to-right {
+  100% {
+    transform: translate(100vh, -80vh) rotate(720deg);
+  }
+}
+
+@keyframes right-to-left {
+  100% {
+    transform: translate(-100vh, -80vh) rotate(720deg) scaleX(-1);
+  }
+}
