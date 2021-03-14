@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const decks = {
     leniEden: "Leni & Eden",
     fastFood: "Fast Food",
-    lica: "Lica"
+    lica: "Lica",
+    eden: "Eden"
   };
 
 
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chooseGrid = document.querySelector(".choose-grid");
   const game = document.querySelector(".game");
   const memoryGame = document.querySelector(".memory-game");
+  const root = document.documentElement;
   const scoreDisplay = document.querySelector("#score");
   const triesDisplay = document.querySelector("#tries");
   const resetButton = document.querySelector("#reset");
@@ -101,6 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
     choose.style.display = "none";
     levelButtons.forEach((button) => button.remove());
     document.querySelector(".which-difficulty").remove();
+    // if level is > 10 adjust grid columns
+    if (level >= 10) {
+      root.style.setProperty("--columns", "5");
+    }
     createBoard();
   }
 
@@ -125,10 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("click", flipCard);
       memoryGame.appendChild(card);
     }
-    game.style.display = "flex";
+    game.style.display = "grid";
   }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   // check for match
-  function checkForMatch() {
+  async function checkForMatch() {
     const cards = document.querySelectorAll("img");
     const optionOneId = cardsChosen[0];
     const optionTwoId = cardsChosen[1];
@@ -136,21 +147,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (match) {
       cardsWon.push(optionOneId, optionTwoId);
       scoreDisplay.textContent = cardsWon.length.toString();
-      cards[optionOneId].removeEventListener("click", flipCard)
-      cards[optionTwoId].removeEventListener("click", flipCard)
     } else {
+      await sleep(1000);
       cards[optionOneId].setAttribute("src", "./images/blank.png");
       cards[optionOneId].classList.remove("flip");
       cards[optionTwoId].setAttribute("src", "./images/blank.png");
       cards[optionTwoId].classList.remove("flip");
     }
+    addClickEvents();
     cardsChosen = [];
     tries++;
     triesDisplay.textContent = tries.toString();
 
     // check if all matches found
     if (cardsWon.length === cardArray.length) {
-      cards.forEach(card => card.removeEventListener("click", flipCard));
+      removeAllClickEvents();
       document.querySelector(".container").appendChild(wonLeft);
       document.querySelector(".container").appendChild(wonRight);
       // setTimeout(alert(`Super, alle gefunden mit ${tries} Versuchen!`), 500);
@@ -162,11 +173,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardId = this.getAttribute("data-id");
     this.classList.add("flip");
     this.setAttribute("src", cardArray[cardId].img);
+    this.removeEventListener("click", flipCard);
     cardsChosen.push(cardId);
     if (cardsChosen.length === 2) {
+      // remove all click event listeners 
+      removeAllClickEvents();
       // check if they are matches
-      setTimeout(checkForMatch, 500);
+      // setTimeout(checkForMatch, 1000);
+      checkForMatch();
     }
+  }
+
+  function removeAllClickEvents() {
+    const cards = document.querySelectorAll("img");
+    cards.forEach(card => card.removeEventListener("click", flipCard));
+  }
+
+  // adds click events to not chosen cards
+  function addClickEvents() {
+    const cards = document.querySelectorAll("img");
+    [...cards]
+      .filter(card => !cardsWon.includes(card))
+      .forEach(card => card.addEventListener("click", flipCard));
   }
 
   function removeBoard() {
@@ -176,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function reset() {
-    console.log("reset");
     // TODO add reset function
     cardArray = [];
     cardsChosen = [];

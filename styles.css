@@ -1,3 +1,8 @@
+:root {
+  --columns: 4;
+  --grid-columns: repeat(var(--columns), auto);
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -10,6 +15,8 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 80%;
+  margin: auto;
 }
 
 .choose h3 {
@@ -52,11 +59,11 @@ body {
 
 .game {
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
   text-align: start;
-  width: 80%;
+  width: 100%;
 }
 
 .info-box {
@@ -74,16 +81,16 @@ body {
 
 .memory-game {
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: var(--grid-columns);
   perspective: 1000px;
 }
 
 .card {
   margin: 10px 10px 10px 10px;
-  width: 8rem;
-  height: 8rem;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   transform: scale(1);
